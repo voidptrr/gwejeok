@@ -27,7 +27,7 @@
         };
         ghostty.enable = true;
         neovim.enable = true;
-        opencode.enable = true;
+        codex.enable = true;
         ssh.authenticationKeyPath = config.age.secrets.githubSshKey.path;
         zsh.enable = true;
       };
