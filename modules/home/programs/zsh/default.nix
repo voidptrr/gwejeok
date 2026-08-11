@@ -20,7 +20,7 @@
         vim = "nvim";
         ll = "ls -la";
         nd = "nix develop -c \"$SHELL\"";
-        rebuild = "sudo nixos-rebuild switch --flake ~/git/dotfiles#${hostname}";
+        rebuild = "sudo nixos-rebuild switch --flake ~/git/gwejeok#${hostname}";
       };
 
       sessionVariables = {
