@@ -402,11 +402,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1787093158,
-        "narHash": "sha256-Y85LHJfoeIn79VIsrukQoGUSVN5t7v04ssooYrCEDdw=",
+        "lastModified": 1787098344,
+        "narHash": "sha256-q7JDXsf8qDKAZu3h4nWvCgeZYsalRezmeEu9kuG/QIE=",
         "owner": "voidptrr",
         "repo": "nvim-config",
-        "rev": "eba44607e40d118842964c7bf7e24c01ba0cb073",
+        "rev": "fb319f36f0ad3dca1447fe7c5d719734af5b7df4",
         "type": "github"
       },
       "original": {
