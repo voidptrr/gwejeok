@@ -7,7 +7,7 @@
   nixosModules =
     [
       inputs.home-manager.nixosModules.home-manager
-      inputs.ragenix.nixosModules.default
+      inputs.agenix.nixosModules.default
     ]
     ++ builtins.attrValues self.nixosModules;
 
