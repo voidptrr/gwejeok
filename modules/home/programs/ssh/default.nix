@@ -14,6 +14,7 @@ in {
   config = {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
       settings."github.com" = lib.mkIf (cfg.authenticationKeyPath != null) {
         HostName = "github.com";
         User = "git";
