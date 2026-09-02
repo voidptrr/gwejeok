@@ -367,11 +367,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1788255121,
-        "narHash": "sha256-WWvg2VboKaxmJtKYSykU/TXoIS1Opo1zVD0Z3u15XQg=",
+        "lastModified": 1788361762,
+        "narHash": "sha256-CFnRsO2RBEuZJrYITYoSy3/8GdYn4XLaE21x3Akr9bs=",
         "owner": "voidptrr",
         "repo": "nvim-config",
-        "rev": "454ba5456ca8d66e46ca5eeeff73f5e656ebb8c7",
+        "rev": "1bb4159cf992b8698873fa7a93a685826b20561e",
         "type": "github"
       },
       "original": {
