@@ -19,8 +19,10 @@
         sandbox_mode = "workspace-write";
         web_search = "live";
 
+        # The package is updated through Nix rather than by Codex itself.
         check_for_update_on_startup = false;
 
+        # Keep credentials and tokens out of spawned commands by default.
         shell_environment_policy.ignore_default_excludes = false;
 
         projects =
