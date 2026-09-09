@@ -19,6 +19,36 @@
     yellow = "#c4b28a";
     black = "#000000";
   };
+  screenshot = pkgs.writeShellApplication {
+    name = "screenshot";
+    runtimeInputs = with pkgs; [
+      coreutils
+      maim
+      xclip
+    ];
+    text = ''
+      mode="''${1:-full}"
+      screenshot_dir="$HOME/Pictures/Screenshots"
+      screenshot_file="$screenshot_dir/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+
+      mkdir -p "$screenshot_dir"
+
+      case "$mode" in
+        full)
+          maim "$screenshot_file"
+          ;;
+        selection)
+          maim --select "$screenshot_file"
+          ;;
+        *)
+          echo "usage: screenshot [full|selection]" >&2
+          exit 2
+          ;;
+      esac
+
+      xclip -selection clipboard -target image/png -in "$screenshot_file"
+    '';
+  };
 in {
   options.my.home.desktop.i3.enable = lib.mkEnableOption "i3 user configuration";
 
@@ -33,6 +63,8 @@ in {
     }
 
     (lib.mkIf (config.my.home.desktop.i3.enable && i3.enable) {
+      home.packages = [screenshot];
+
       services.picom = {
         enable = true;
         backend = "glx";
@@ -161,6 +193,10 @@ in {
             XF86AudioRaiseVolume = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%";
             XF86AudioLowerVolume = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
             XF86AudioMicMute = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+
+            Print = "exec --no-startup-id ${lib.getExe screenshot} full";
+            "Shift+Print" = "exec --no-startup-id ${lib.getExe screenshot} selection";
+            "Mod4+Shift+s" = "exec --no-startup-id ${lib.getExe screenshot} selection";
 
             "Mod4+Return" = "exec --no-startup-id ghostty";
             "Mod4+m" = "exec --no-startup-id rofi -show drun -normal-window";
