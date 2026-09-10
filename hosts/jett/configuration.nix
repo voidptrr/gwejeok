@@ -14,7 +14,8 @@
       xserver.enable = true;
       i3 = {
         enable = true;
-        usei3Status = true;
+        usei3Status = false;
+        usePolybar = true;
       };
     };
 
