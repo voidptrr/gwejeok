@@ -5,7 +5,9 @@
   osConfig,
   pkgs,
   ...
-}: {
+}: let
+  inherit (osConfig.my.snippets.theme) font language palette;
+in {
   options.my.home.programs.firefox.enable = lib.mkEnableOption "firefox";
 
   config = lib.mkIf config.my.home.programs.firefox.enable {
@@ -91,7 +93,9 @@
             };
           };
         };
-        settings = import ./settings.nix {inherit (osConfig.my.snippets.theme) font language;};
+        userChrome = import ./userChrome.nix {inherit palette;};
+        userContent = import ./userContent.nix {inherit palette;};
+        settings = import ./settings.nix {inherit font language;};
       };
     };
   };

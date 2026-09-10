@@ -7,7 +7,7 @@
   ...
 }: let
   i3 = osConfig.my.nixos.desktop.i3;
-  inherit (osConfig.my.snippets.theme) colors font wallpaper;
+  inherit (osConfig.my.snippets.theme) font palette wallpaper;
   screenshot = pkgs.writeShellApplication {
     name = "screenshot";
     runtimeInputs = with pkgs; [
@@ -113,34 +113,34 @@ in {
             ];
           };
           colors = {
-            background = colors.black;
+            background = palette.base00;
             focused = {
-              border = colors.gray;
-              background = colors.black;
-              text = colors.yellow;
-              indicator = colors.gray;
-              childBorder = colors.gray;
+              border = palette.base06;
+              background = palette.base00;
+              text = palette.base0A;
+              indicator = palette.base06;
+              childBorder = palette.base06;
             };
             focusedInactive = {
-              border = colors.gray;
-              background = colors.black;
-              text = colors.green;
-              indicator = colors.gray;
-              childBorder = colors.gray;
+              border = palette.base0D;
+              background = palette.base00;
+              text = palette.base0D;
+              indicator = palette.base0D;
+              childBorder = palette.base0D;
             };
             unfocused = {
-              border = colors.gray;
-              background = colors.black;
-              text = colors.muted;
-              indicator = colors.gray;
-              childBorder = colors.gray;
+              border = palette.base04;
+              background = palette.base00;
+              text = palette.base04;
+              indicator = palette.base04;
+              childBorder = palette.base04;
             };
             urgent = {
-              border = colors.red;
-              background = colors.black;
-              text = colors.red;
-              indicator = colors.red;
-              childBorder = colors.red;
+              border = palette.base08;
+              background = palette.base00;
+              text = palette.base07;
+              indicator = palette.base08;
+              childBorder = palette.base08;
             };
           };
           modes = lib.mkForce {};

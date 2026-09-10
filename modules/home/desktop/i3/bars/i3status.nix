@@ -6,7 +6,7 @@
   ...
 }: let
   i3 = osConfig.my.nixos.desktop.i3;
-  inherit (osConfig.my.snippets.theme) colors font;
+  inherit (osConfig.my.snippets.theme) font palette;
   enabled = config.my.home.desktop.i3.enable && i3.enable && i3.usei3Status;
 in {
   config = lib.mkIf enabled {
@@ -17,33 +17,33 @@ in {
         statusCommand = "${pkgs.i3status}/bin/i3status";
         trayOutput = "primary";
         colors = {
-          background = colors.black;
-          statusline = colors.green;
-          separator = colors.muted;
+          background = palette.base00;
+          statusline = palette.base06;
+          separator = palette.base04;
           focusedWorkspace = {
-            border = colors.black;
-            background = colors.black;
-            text = colors.yellow;
+            border = palette.base00;
+            background = palette.base00;
+            text = palette.base0A;
           };
           activeWorkspace = {
-            border = colors.black;
-            background = colors.black;
-            text = colors.green;
+            border = palette.base00;
+            background = palette.base00;
+            text = palette.base06;
           };
           inactiveWorkspace = {
-            border = colors.black;
-            background = colors.black;
-            text = colors.muted;
+            border = palette.base00;
+            background = palette.base00;
+            text = palette.base04;
           };
           urgentWorkspace = {
-            border = colors.black;
-            background = colors.black;
-            text = colors.red;
+            border = palette.base00;
+            background = palette.base00;
+            text = palette.base07;
           };
           bindingMode = {
-            border = colors.black;
-            background = colors.black;
-            text = colors.red;
+            border = palette.base00;
+            background = palette.base00;
+            text = palette.base07;
           };
         };
         extraConfig = ''
@@ -60,14 +60,14 @@ in {
         markup = "pango";
         colors = true;
         interval = 2;
-        color_good = colors.green;
-        color_bad = colors.red;
-        color_degraded = colors.yellow;
+        color_good = palette.base06;
+        color_bad = palette.base07;
+        color_degraded = palette.base0A;
       };
       modules = {
         "tztime local" = {
           position = 1;
-          settings.format = "<span color='${colors.yellow}'>%Y년 %m월 %d일 %H:%M</span>";
+          settings.format = "<span color='${palette.base0A}'>%Y년 %m월 %d일 %H:%M</span>";
         };
         "volume master" = {
           position = 2;

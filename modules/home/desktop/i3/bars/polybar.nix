@@ -6,7 +6,7 @@
   ...
 }: let
   i3 = osConfig.my.nixos.desktop.i3;
-  inherit (osConfig.my.snippets.theme) colors font;
+  inherit (osConfig.my.snippets.theme) font palette;
   enabled = config.my.home.desktop.i3.enable && i3.enable && i3.usePolybar;
 in {
   config = lib.mkIf enabled {
@@ -33,8 +33,8 @@ in {
           offset-x = 0;
           offset-y = 0;
           fixed-center = true;
-          background = colors.black;
-          foreground = colors.gray;
+          background = palette.base00;
+          foreground = palette.base07;
           border-size = 0;
           line-size = "2px";
           padding-left = 1;
@@ -65,27 +65,27 @@ in {
           wrapping-scroll = false;
           format = "<label-state> <label-mode>";
           label-focused = "%index%";
-          label-focused-foreground = colors.yellow;
-          label-focused-underline = colors.yellow;
+          label-focused-foreground = palette.base0A;
+          label-focused-underline = palette.base0A;
           label-focused-padding = 1;
           label-unfocused = "%index%";
-          label-unfocused-foreground = colors.gray;
+          label-unfocused-foreground = palette.base07;
           label-unfocused-padding = 1;
           label-visible = "%index%";
-          label-visible-foreground = colors.green;
+          label-visible-foreground = palette.base06;
           label-visible-padding = 1;
           label-urgent = "%index%";
-          label-urgent-foreground = colors.red;
+          label-urgent-foreground = palette.base07;
           label-urgent-padding = 1;
           label-mode = "%mode%";
-          label-mode-foreground = colors.red;
+          label-mode-foreground = palette.base07;
           label-mode-padding = 2;
         };
 
         "module/xwindow" = {
           type = "internal/xwindow";
           label = "%title:0:50:...%";
-          label-foreground = colors.green;
+          label-foreground = palette.base06;
           label-empty = "";
         };
 
@@ -95,20 +95,20 @@ in {
           use-ui-max = false;
           format-volume = "<ramp-volume> <label-volume>";
           label-volume = "%percentage%%";
-          label-volume-foreground = colors.gray;
+          label-volume-foreground = palette.base07;
           ramp-volume = [
             ""
             ""
             ""
           ];
           ramp-volume-font = 2;
-          ramp-volume-foreground = colors.yellow;
+          ramp-volume-foreground = palette.base0A;
           format-muted = "<label-muted>";
           format-muted-prefix = "󰖁 ";
           format-muted-prefix-font = 2;
-          format-muted-prefix-foreground = colors.red;
+          format-muted-prefix-foreground = palette.base07;
           label-muted = "muted";
-          label-muted-foreground = colors.muted;
+          label-muted-foreground = palette.base04;
         };
 
         "module/wireless" = {
@@ -118,15 +118,15 @@ in {
           format-connected = "<label-connected>";
           format-connected-prefix = " ";
           format-connected-prefix-font = 2;
-          format-connected-prefix-foreground = colors.green;
+          format-connected-prefix-foreground = palette.base06;
           label-connected = "%signal%%";
-          label-connected-foreground = colors.gray;
+          label-connected-foreground = palette.base07;
           format-disconnected = "<label-disconnected>";
           format-disconnected-prefix = "󰖪 ";
           format-disconnected-prefix-font = 2;
-          format-disconnected-prefix-foreground = colors.red;
+          format-disconnected-prefix-foreground = palette.base07;
           label-disconnected = "down";
-          label-disconnected-foreground = colors.muted;
+          label-disconnected-foreground = palette.base04;
         };
 
         "module/cpu" = {
@@ -135,9 +135,9 @@ in {
           format = "<label>";
           format-prefix = " ";
           format-prefix-font = 2;
-          format-prefix-foreground = colors.green;
+          format-prefix-foreground = palette.base06;
           label = "%percentage%%";
-          label-foreground = colors.gray;
+          label-foreground = palette.base07;
         };
 
         "module/memory" = {
@@ -146,9 +146,9 @@ in {
           format = "<label>";
           format-prefix = " ";
           format-prefix-font = 2;
-          format-prefix-foreground = colors.yellow;
+          format-prefix-foreground = palette.base0A;
           label = "%percentage_used%%";
-          label-foreground = colors.gray;
+          label-foreground = palette.base07;
         };
 
         "module/battery" = {
@@ -160,7 +160,7 @@ in {
           poll-interval = 5;
           format-charging = "<animation-charging> <label-charging>";
           label-charging = "+%percentage%%";
-          label-charging-foreground = colors.gray;
+          label-charging-foreground = palette.base07;
           animation-charging = [
             ""
             ""
@@ -169,11 +169,11 @@ in {
             ""
           ];
           animation-charging-font = 2;
-          animation-charging-foreground = colors.green;
+          animation-charging-foreground = palette.base06;
           animation-charging-framerate = 750;
           format-discharging = "<ramp-capacity> <label-discharging>";
           label-discharging = "%percentage%%";
-          label-discharging-foreground = colors.gray;
+          label-discharging-foreground = palette.base07;
           ramp-capacity = [
             ""
             ""
@@ -182,19 +182,19 @@ in {
             ""
           ];
           ramp-capacity-font = 2;
-          ramp-capacity-foreground = colors.yellow;
+          ramp-capacity-foreground = palette.base0A;
           format-full = "<label-full>";
           format-full-prefix = " ";
           format-full-prefix-font = 2;
-          format-full-prefix-foreground = colors.green;
+          format-full-prefix-foreground = palette.base06;
           label-full = "full";
-          label-full-foreground = colors.gray;
+          label-full-foreground = palette.base07;
           format-low = "<label-low>";
           format-low-prefix = " ";
           format-low-prefix-font = 2;
-          format-low-prefix-foreground = colors.red;
+          format-low-prefix-foreground = palette.base07;
           label-low = "%percentage%%";
-          label-low-foreground = colors.red;
+          label-low-foreground = palette.base07;
         };
 
         "module/tray" = {
@@ -209,11 +209,11 @@ in {
           date = "%Y년 %m월 %d일";
           time = "%H:%M";
           label = "%date% %time%";
-          label-foreground = colors.gray;
+          label-foreground = palette.base07;
           label-padding = 1;
           format-prefix = " ";
           format-prefix-font = 2;
-          format-prefix-foreground = colors.yellow;
+          format-prefix-foreground = palette.base0A;
         };
       };
     };
