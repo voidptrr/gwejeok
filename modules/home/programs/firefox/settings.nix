@@ -20,6 +20,11 @@ in {
   "browser.download.useDownloadDir" = false;
   "browser.toolbars.bookmarks.showInPrivateBrowsing" = true;
   "browser.toolbars.bookmarks.visibility" = "always";
+  "extensions.activeThemeID" = "default-theme@mozilla.org";
+  "ui.systemUsesDarkTheme" = 1;
+  "browser.theme.toolbar-theme" = 2;
+  "browser.theme.content-theme" = 2;
+  "layout.css.prefers-color-scheme.content-override" = 2;
   "extensions.autoDisableScopes" = 0;
 
   "privacy.globalprivacycontrol.functionality.enabled" = true;

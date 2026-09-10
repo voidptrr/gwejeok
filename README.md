@@ -1,5 +1,6 @@
 # NixOS configuration
 
+## Dark-blue
 <p align="center">
-  <img src="assets/desktop-view.png" alt="Desktop view">
+  <img src="assets/desktop-dark-blue-view.png" alt="Dark-blue Desktop view">
 </p>
