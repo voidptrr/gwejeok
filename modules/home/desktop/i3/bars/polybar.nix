@@ -36,17 +36,19 @@ in {
           background = colors.black;
           foreground = colors.gray;
           border-size = 0;
+          line-size = "2px";
           padding-left = 1;
           padding-right = 1;
           module-margin = 1;
           separator = "";
-          font = [
-            "${builtins.head font.names}:size=${toString font.size};4"
-            "Symbols Nerd Font Mono:size=${toString font.size};4"
-            "DejaVu Sans:size=${toString font.size};4"
-          ];
-          modules-left = "i3";
-          modules-center = "xwindow";
+          font =
+            [
+              "${builtins.head font.names}:size=${toString font.size};4"
+              "Symbols Nerd Font Mono:size=${toString font.size};4"
+            ]
+            ++ map (name: "${name}:size=${toString font.size};4") (builtins.tail font.names)
+            ++ ["DejaVu Sans:size=${toString font.size};4"];
+          modules-left = "i3 xwindow";
           modules-right = "pulseaudio wireless cpu memory battery tray date";
           cursor-click = "pointer";
           cursor-scroll = "ns-resize";
@@ -64,6 +66,7 @@ in {
           format = "<label-state> <label-mode>";
           label-focused = "%index%";
           label-focused-foreground = colors.yellow;
+          label-focused-underline = colors.yellow;
           label-focused-padding = 1;
           label-unfocused = "%index%";
           label-unfocused-foreground = colors.gray;
@@ -81,7 +84,7 @@ in {
 
         "module/xwindow" = {
           type = "internal/xwindow";
-          label = "%title:0:80:...%";
+          label = "%title:0:50:...%";
           label-foreground = colors.green;
           label-empty = "";
         };
@@ -203,7 +206,7 @@ in {
         "module/date" = {
           type = "internal/date";
           interval = 1;
-          date = "%Y-%m-%d";
+          date = "%Y년 %m월 %d일";
           time = "%H:%M";
           label = "%date% %time%";
           label-foreground = colors.gray;

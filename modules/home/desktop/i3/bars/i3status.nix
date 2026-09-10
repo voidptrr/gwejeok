@@ -67,7 +67,7 @@ in {
       modules = {
         "tztime local" = {
           position = 1;
-          settings.format = "<span color='${colors.yellow}'>%Y-%m-%d %H:%M</span>";
+          settings.format = "<span color='${colors.yellow}'>%Y년 %m월 %d일 %H:%M</span>";
         };
         "volume master" = {
           position = 2;

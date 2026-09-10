@@ -1,11 +1,14 @@
-{font}: let
+{
+  font,
+  language,
+}: let
   fontFamily = builtins.head font.names;
   fontFamilyList = builtins.concatStringsSep ", " font.names;
 in {
   "browser.startup.homepage" = "about:blank";
   "browser.warnOnQuit" = false;
   "layout.css.devPixelsPerPx" = 1.25;
-  "intl.accept_languages" = "en-US,en";
+  "intl.accept_languages" = builtins.concatStringsSep "," language.browser;
   "signon.rememberSignons" = false;
   "services.sync.prefs.sync.signon.rememberSignons" = false;
   "signon.autofillForms" = false;

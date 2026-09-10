@@ -1,4 +1,5 @@
 {
+  config,
   hostname,
   pkgs,
   ...
@@ -14,6 +15,7 @@
   };
 
   time.timeZone = "Europe/London";
+  i18n.defaultLocale = config.my.snippets.theme.language.locale;
   programs.zsh.enable = true;
 
   users.users.voidptr = {

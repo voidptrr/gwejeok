@@ -91,7 +91,7 @@
             };
           };
         };
-        settings = import ./settings.nix {inherit (osConfig.my.snippets.theme) font;};
+        settings = import ./settings.nix {inherit (osConfig.my.snippets.theme) font language;};
       };
     };
   };

@@ -12,7 +12,7 @@ in {
     hardware.alsa.enablePersistence = true;
     security.rtkit.enable = true;
 
-    fonts.packages = [font.package];
+    fonts.packages = font.packages;
     fonts.fontconfig.defaultFonts = {
       monospace = font.names;
       sansSerif = font.names;

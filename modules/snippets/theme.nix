@@ -9,18 +9,33 @@
 
     default = {
       wallpaper = ../../assets/anime2.jpg;
+      language = {
+        locale = "ko_KR.UTF-8";
+        browser = [
+          "ko-KR"
+          "ko"
+          "en-GB"
+          "en"
+        ];
+      };
       font = {
-        names = ["JetBrains Mono"];
-        package = pkgs.jetbrains-mono;
+        names = [
+          "JetBrains Mono"
+          "Noto Sans CJK KR"
+        ];
+        packages = [
+          pkgs.jetbrains-mono
+          pkgs.noto-fonts-cjk-sans
+        ];
         size = 12.0;
       };
       colors = {
-        green = "#8a9a7b";
-        gray = "#8b8792";
-        muted = "#808080";
-        red = "#c4746e";
-        yellow = "#c4b28a";
-        black = "#000000";
+        green = "#4e927f";
+        gray = "#e3dccb";
+        muted = "#7d817c";
+        red = "#c8584f";
+        yellow = "#d1a64a";
+        black = "#101416";
         terminal = "#101d23";
       };
     };
