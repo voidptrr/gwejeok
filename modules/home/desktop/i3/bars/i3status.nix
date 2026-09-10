@@ -3,17 +3,16 @@
   lib,
   osConfig,
   pkgs,
-  i3Theme,
   ...
 }: let
   i3 = osConfig.my.nixos.desktop.i3;
-  inherit (i3Theme) colors font;
+  inherit (osConfig.my.snippets.theme) colors font;
   enabled = config.my.home.desktop.i3.enable && i3.enable && i3.usei3Status;
 in {
   config = lib.mkIf enabled {
     xsession.windowManager.i3.config.bars = [
       {
-        fonts = font;
+        fonts = {inherit (font) names size;};
         position = "top";
         statusCommand = "${pkgs.i3status}/bin/i3status";
         trayOutput = "primary";

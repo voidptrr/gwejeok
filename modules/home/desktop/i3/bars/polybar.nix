@@ -3,11 +3,10 @@
   lib,
   osConfig,
   pkgs,
-  i3Theme,
   ...
 }: let
   i3 = osConfig.my.nixos.desktop.i3;
-  inherit (i3Theme) colors;
+  inherit (osConfig.my.snippets.theme) colors font;
   enabled = config.my.home.desktop.i3.enable && i3.enable && i3.usePolybar;
 in {
   config = lib.mkIf enabled {
@@ -37,14 +36,14 @@ in {
           background = colors.black;
           foreground = colors.gray;
           border-size = 0;
-          padding-left = 2;
-          padding-right = 2;
-          module-margin = 2;
+          padding-left = 1;
+          padding-right = 1;
+          module-margin = 1;
           separator = "";
           font = [
-            "JetBrains Mono:size=11;4"
-            "Symbols Nerd Font Mono:size=12;4"
-            "DejaVu Sans:size=11;4"
+            "${builtins.head font.names}:size=${toString font.size};4"
+            "Symbols Nerd Font Mono:size=${toString font.size};4"
+            "DejaVu Sans:size=${toString font.size};4"
           ];
           modules-left = "i3";
           modules-center = "xwindow";

@@ -1,4 +1,7 @@
-{
+{font}: let
+  fontFamily = builtins.head font.names;
+  fontFamilyList = builtins.concatStringsSep ", " font.names;
+in {
   "browser.startup.homepage" = "about:blank";
   "browser.warnOnQuit" = false;
   "layout.css.devPixelsPerPx" = 1.25;
@@ -33,9 +36,9 @@
   "browser.newtabpage.activity-stream.feeds.recommendationprovider" = false;
   "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
-  "font.name.sans-serif.x-western" = "JetBrains Mono";
-  "font.name-list.sans-serif.x-western" = "JetBrains Mono";
-  "font.name.monospace.x-western" = "JetBrains Mono";
-  "font.name-list.monospace.x-western" = "JetBrains Mono";
-  "font.size.monospace.x-western" = 13;
+  "font.name.sans-serif.x-western" = fontFamily;
+  "font.name-list.sans-serif.x-western" = fontFamilyList;
+  "font.name.monospace.x-western" = fontFamily;
+  "font.name-list.monospace.x-western" = fontFamilyList;
+  "font.size.monospace.x-western" = builtins.floor font.size;
 }

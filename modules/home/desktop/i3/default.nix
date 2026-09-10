@@ -4,12 +4,10 @@
   osConfig,
   pkgs,
   self,
-  i3Theme,
   ...
 }: let
   i3 = osConfig.my.nixos.desktop.i3;
-  wallpaper = ../../../../assets/wallpaper-space1.png;
-  inherit (i3Theme) colors font;
+  inherit (osConfig.my.snippets.theme) colors font wallpaper;
   screenshot = pkgs.writeShellApplication {
     name = "screenshot";
     runtimeInputs = with pkgs; [
@@ -95,7 +93,7 @@ in {
       xsession.windowManager.i3 = {
         enable = true;
         config = {
-          fonts = font;
+          fonts = {inherit (font) names size;};
           modifier = "Mod4";
           focus.followMouse = true;
           floating = {

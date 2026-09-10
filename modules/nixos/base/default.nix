@@ -3,19 +3,19 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  inherit (config.my.snippets.theme) font;
+in {
   options.my.nixos.base.enable = lib.mkEnableOption "base system configuration";
 
   config = lib.mkIf config.my.nixos.base.enable {
     hardware.alsa.enablePersistence = true;
     security.rtkit.enable = true;
 
-    fonts.packages = with pkgs; [
-      jetbrains-mono
-    ];
+    fonts.packages = [font.package];
     fonts.fontconfig.defaultFonts = {
-      monospace = ["JetBrains Mono"];
-      sansSerif = ["JetBrains Mono"];
+      monospace = font.names;
+      sansSerif = font.names;
     };
     environment.systemPackages = with pkgs; [
       brightnessctl

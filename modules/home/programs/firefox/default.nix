@@ -2,6 +2,7 @@
   inputs,
   lib,
   config,
+  osConfig,
   pkgs,
   ...
 }: {
@@ -90,7 +91,7 @@
             };
           };
         };
-        settings = import ./settings.nix;
+        settings = import ./settings.nix {inherit (osConfig.my.snippets.theme) font;};
       };
     };
   };
