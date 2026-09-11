@@ -5,24 +5,37 @@
   pkgs,
   ...
 }: let
-  i3 = osConfig.my.nixos.desktop.i3;
+  x11 = config.my.home.desktop.x11;
+  i3 = x11.i3;
+  polybar = x11.polybar;
   inherit (osConfig.my.snippets.theme) font palette;
-  enabled = config.my.home.desktop.i3.enable && i3.enable && i3.usePolybar;
+  i3Enabled = x11.enable && i3.enable;
 in {
-  config = lib.mkIf enabled {
-    xsession.windowManager.i3.config.bars = [];
-    xsession.windowManager.i3.config.startup = [
+  options.my.home.desktop.x11.polybar.enable = lib.mkEnableOption "Polybar status bar";
+
+  config = lib.mkIf polybar.enable {
+    assertions = [
       {
-        command = "systemctl --user restart polybar.service";
-        always = true;
-        notification = false;
+        assertion = x11.enable;
+        message = "my.home.desktop.x11.polybar.enable requires my.home.desktop.x11.enable";
       }
     ];
+
+    xsession.windowManager.i3 = lib.mkIf i3Enabled {
+      config.bars = [];
+      config.startup = [
+        {
+          command = "systemctl --user restart polybar.service";
+          always = true;
+          notification = false;
+        }
+      ];
+    };
 
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {
-        i3Support = true;
+        i3Support = i3Enabled;
         pulseSupport = true;
       };
       script = "polybar --reload main &";
@@ -48,7 +61,7 @@ in {
             ]
             ++ map (name: "${name}:size=${toString font.size};4") (builtins.tail font.names)
             ++ ["DejaVu Sans:size=${toString font.size};4"];
-          modules-left = "i3";
+          modules-left = lib.optionalString i3Enabled "i3";
           modules-right = "pulseaudio wireless cpu memory battery tray date";
           cursor-click = "pointer";
           cursor-scroll = "ns-resize";

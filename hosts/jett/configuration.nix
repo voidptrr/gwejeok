@@ -11,11 +11,9 @@
     base.enable = true;
 
     desktop = {
-      xserver.enable = true;
-      i3 = {
+      x11 = {
         enable = true;
-        usei3Status = false;
-        usePolybar = true;
+        i3.enable = true;
       };
     };
 

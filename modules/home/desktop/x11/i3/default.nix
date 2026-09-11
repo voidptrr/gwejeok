@@ -2,94 +2,36 @@
   lib,
   config,
   osConfig,
-  pkgs,
   self,
   ...
 }: let
-  i3 = osConfig.my.nixos.desktop.i3;
-  inherit (osConfig.my.snippets.theme) font palette wallpaper;
-  screenshot = pkgs.writeShellApplication {
-    name = "screenshot";
-    runtimeInputs = with pkgs; [
-      coreutils
-      maim
-      xclip
-    ];
-    text = ''
-      mode="''${1:-full}"
-      screenshot_dir="$HOME/Pictures/Screenshots"
-      screenshot_file="$screenshot_dir/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
-
-      mkdir -p "$screenshot_dir"
-
-      case "$mode" in
-        full)
-          maim "$screenshot_file"
-          ;;
-        selection)
-          maim --select "$screenshot_file"
-          ;;
-        *)
-          echo "usage: screenshot [full|selection]" >&2
-          exit 2
-          ;;
-      esac
-
-      xclip -selection clipboard -target image/png -in "$screenshot_file"
-    '';
-  };
+  i3 = config.my.home.desktop.x11.i3;
+  osI3 = osConfig.my.nixos.desktop.x11.i3;
+  inherit (osConfig.my.snippets.theme) font palette;
 in {
   imports = self.lib.fs.scanPaths ./.;
 
-  options.my.home.desktop.i3.enable = lib.mkEnableOption "i3 user configuration";
+  options.my.home.desktop.x11.i3.enable = lib.mkEnableOption "i3 user configuration";
 
   config = lib.mkMerge [
     {
       assertions = [
         {
-          assertion = !i3.usei3Status || i3.enable;
-          message = "my.nixos.desktop.i3.usei3Status requires my.nixos.desktop.i3.enable";
+          assertion = !i3.enable || config.my.home.desktop.x11.enable;
+          message = "my.home.desktop.x11.i3.enable requires my.home.desktop.x11.enable";
         }
         {
-          assertion = !i3.usePolybar || i3.enable;
-          message = "my.nixos.desktop.i3.usePolybar requires my.nixos.desktop.i3.enable";
+          assertion = !i3.enable || osI3.enable;
+          message = "my.home.desktop.x11.i3.enable requires my.nixos.desktop.x11.i3.enable";
         }
         {
-          assertion = !(i3.usei3Status && i3.usePolybar);
-          message = "my.nixos.desktop.i3.usei3Status and my.nixos.desktop.i3.usePolybar are mutually exclusive";
+          assertion = !(i3.i3status.enable && config.my.home.desktop.x11.polybar.enable);
+          message = "my.home.desktop.x11.i3.i3status.enable and my.home.desktop.x11.polybar.enable are mutually exclusive";
         }
       ];
     }
 
-    (lib.mkIf (config.my.home.desktop.i3.enable && i3.enable) {
-      home.packages = [screenshot];
-
-      services.picom = {
-        enable = true;
-        backend = "glx";
-        vSync = true;
-        settings = {
-          blur-background = true;
-          blur-background-fixed = true;
-          blur-method = "dual_kawase";
-          blur-strength = 4;
-        };
-      };
-
-      systemd.user.services.xwallpaper = {
-        Unit = {
-          Description = "Set X11 wallpaper";
-          PartOf = ["graphical-session.target"];
-          Before = ["picom.service"];
-        };
-        Service = {
-          Type = "oneshot";
-          ExecStart = "${lib.getExe pkgs.xwallpaper} --zoom ${wallpaper}";
-          RemainAfterExit = true;
-        };
-        Install.WantedBy = ["graphical-session.target"];
-      };
-
+    (lib.mkIf i3.enable {
       xsession.windowManager.i3 = {
         enable = true;
         config = {
@@ -152,9 +94,9 @@ in {
             XF86AudioLowerVolume = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%";
             XF86AudioMicMute = "exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle";
 
-            Print = "exec --no-startup-id ${lib.getExe screenshot} full";
-            "Shift+Print" = "exec --no-startup-id ${lib.getExe screenshot} selection";
-            "Mod4+Shift+s" = "exec --no-startup-id ${lib.getExe screenshot} selection";
+            Print = "exec --no-startup-id screenshot full";
+            "Shift+Print" = "exec --no-startup-id screenshot selection";
+            "Mod4+Shift+s" = "exec --no-startup-id screenshot selection";
 
             "Mod4+Return" = "exec --no-startup-id ghostty";
             "Mod4+m" = "exec --no-startup-id rofi -show drun -normal-window";

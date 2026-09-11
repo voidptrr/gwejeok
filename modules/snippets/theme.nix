@@ -21,6 +21,7 @@
     ];
     packages = with pkgs; [
       jetbrains-mono
+      nerd-fonts.symbols-only
       noto-fonts-cjk-sans
     ];
     size = 12.0;

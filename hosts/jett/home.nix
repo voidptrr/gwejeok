@@ -15,7 +15,11 @@
     programs.home-manager.enable = true;
 
     my.home = {
-      desktop.i3.enable = true;
+      desktop.x11 = {
+        enable = true;
+        i3.enable = true;
+        polybar.enable = true;
+      };
 
       programs = {
         firefox.enable = true;
