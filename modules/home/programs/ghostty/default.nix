@@ -22,8 +22,8 @@ in {
           "4=${palette.base0D}"
           "5=${palette.base0E}"
           "6=${palette.base0C}"
-          "7=${palette.base05}"
-          "8=${palette.base03}"
+          "7=${palette.base07}"
+          "8=${palette.base0A}"
           "9=${palette.base08}"
           "10=${palette.base0B}"
           "11=${palette.base0A}"
@@ -36,7 +36,7 @@ in {
         foreground = palette.base07;
         cursor-color = palette.base06;
         cursor-text = palette.base00;
-        selection-background = palette.base03;
+        selection-background = palette.base04;
         selection-foreground = palette.base07;
       };
       settings = {

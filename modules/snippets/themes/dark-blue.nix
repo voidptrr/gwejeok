@@ -1,5 +1,5 @@
 {
-  wallpaper = ../../../assets/anime2.jpg;
+  wallpaper = ../../../assets/dark-blue-bg.jpg;
   palette = {
     base00 = "#02020E";
     base01 = "#070616";

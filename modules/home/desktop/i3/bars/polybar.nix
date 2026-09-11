@@ -48,7 +48,7 @@ in {
             ]
             ++ map (name: "${name}:size=${toString font.size};4") (builtins.tail font.names)
             ++ ["DejaVu Sans:size=${toString font.size};4"];
-          modules-left = "i3 xwindow";
+          modules-left = "i3";
           modules-right = "pulseaudio wireless cpu memory battery tray date";
           cursor-click = "pointer";
           cursor-scroll = "ns-resize";
@@ -65,11 +65,11 @@ in {
           wrapping-scroll = false;
           format = "<label-state> <label-mode>";
           label-focused = "%index%";
-          label-focused-foreground = palette.base0A;
+          label-focused-foreground = palette.base07;
           label-focused-underline = palette.base0A;
           label-focused-padding = 1;
           label-unfocused = "%index%";
-          label-unfocused-foreground = palette.base07;
+          label-unfocused-foreground = palette.base05;
           label-unfocused-padding = 1;
           label-visible = "%index%";
           label-visible-foreground = palette.base06;
@@ -80,13 +80,6 @@ in {
           label-mode = "%mode%";
           label-mode-foreground = palette.base07;
           label-mode-padding = 2;
-        };
-
-        "module/xwindow" = {
-          type = "internal/xwindow";
-          label = "%title:0:50:...%";
-          label-foreground = palette.base06;
-          label-empty = "";
         };
 
         "module/pulseaudio" = {
