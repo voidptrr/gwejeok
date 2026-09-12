@@ -16,8 +16,9 @@ in {
     ];
 
     secrets = {
-      githubSshKey = userSecret (self.secretsDir + /github-ssh-key.age);
-      gitSigningKey = userSecret (self.secretsDir + /git-signing-key.age);
+      codebergSshKey = userSecret (self.secretsDir + /privatekeys/codeberg/auth.age);
+      githubSshKey = userSecret (self.secretsDir + /privatekeys/github/auth.age);
+      gitSigningKey = userSecret (self.secretsDir + /privatekeys/commit.age);
     };
   };
 }

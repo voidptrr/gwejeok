@@ -32,7 +32,10 @@
         ghostty.enable = true;
         neovim.enable = true;
         codex.enable = true;
-        ssh.authenticationKeyPath = config.age.secrets.githubSshKey.path;
+        ssh.authenticationKeyPaths = {
+          github = config.age.secrets.githubSshKey.path;
+          codeberg = config.age.secrets.codebergSshKey.path;
+        };
         zsh.enable = true;
       };
     };
